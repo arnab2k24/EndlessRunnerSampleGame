@@ -1,0 +1,32 @@
+using UnityEngine;
+
+public class RoadSpawner : MonoBehaviour
+{
+    public GameObject roadPrefab;
+    public Transform player;
+    private float spawnZ = 0;
+    private float roadLength = 30f;
+    private int numRoads = 5;
+
+    void Start()
+    {
+        for (int i = 0; i < numRoads; i++)
+        {
+            SpawnRoad();
+        }
+    }
+
+    void Update()
+    {
+        if (player.position.z - 30 > spawnZ - (numRoads * roadLength))
+        {
+            SpawnRoad();
+        }
+    }
+
+    void SpawnRoad()
+    {
+        Instantiate(roadPrefab, Vector3.forward * spawnZ, Quaternion.identity);
+        spawnZ += roadLength;
+    }
+}
